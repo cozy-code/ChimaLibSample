@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ChimaLibSampleContext.cs" />
+    <Compile Include="Models\ChimaLibSampleInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
