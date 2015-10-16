@@ -1,0 +1,3 @@
+[submodule "ChimaLib"]
+	path = ChimaLib
+	url = git@github.com:cozy-code/ChimaLib.git
