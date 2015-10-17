@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ChimaLibSample.Models;
 
+using ChimaLib.Models;
+
 namespace ChimaLibSample.Controllers
 {
     public class ArticlesController : Controller
@@ -15,9 +17,25 @@ namespace ChimaLibSample.Controllers
         private ChimaLibSampleContext db = new ChimaLibSampleContext();
 
         // GET: Articles
-        public ActionResult Index()
+        public ActionResult Index(string sort)
         {
-            return View(db.Articles.ToList());
+            var query = db.Articles.AsQueryable();  //データソース
+
+            Article article = null;
+            ISortFieldDefinition<Article>[] sort_fields = new[] {   //ソート列定義
+                article.DefineSort(a=>a.Url),
+                article.DefineSort(a=>a.Title),
+                article.DefineSort(a=>a.Description),
+                article.DefineSort(a=>a.Viewcount),
+                article.DefineSort(a=>a.Published),
+                article.DefineSort(a=>a.Released),
+            };
+
+            foreach(var field in sort_fields) { //ソート適用
+                query=field.AddOrderBy(query, sort);
+            }
+
+            return View(query.ToList());    //ソート済み結果をViewに返す。
         }
 
         // GET: Articles/Details/5
