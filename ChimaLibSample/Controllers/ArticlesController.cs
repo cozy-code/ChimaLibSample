@@ -22,19 +22,21 @@ namespace ChimaLibSample.Controllers
             var query = db.Articles.AsQueryable();  //データソース
 
             Article article = null;
-            ISortFieldDefinition<Article>[] sort_fields = new[] {   //ソート列定義
-                article.DefineSort(a=>a.Url),
-                article.DefineSort(a=>a.Title),
-                article.DefineSort(a=>a.Description),
-                article.DefineSort(a=>a.Viewcount),
-                article.DefineSort(a=>a.Published),
-                article.DefineSort(a=>a.Released),
+            SortDefinition<Article> sort_def = new SortDefinition<Article>() {
+                Fields = new[] {   //ソート列定義
+                    article.DefineSort(a=>a.Url),
+                    article.DefineSort(a=>a.Title),
+                    article.DefineSort(a=>a.Description),
+                    article.DefineSort(a=>a.Viewcount),
+                    article.DefineSort(a=>a.Published),
+                    article.DefineSort(a=>a.Released),
+                },
+                SortKey=sort
             };
 
-            foreach(var field in sort_fields) { //ソート適用
-                query=field.AddOrderBy(query, sort);
-            }
+            query=sort_def.AddOrderBy(query);
 
+            ViewBag.SortDef = sort_def;     //リンク作成用にソート定義を渡す
             return View(query.ToList());    //ソート済み結果をViewに返す。
         }
 
