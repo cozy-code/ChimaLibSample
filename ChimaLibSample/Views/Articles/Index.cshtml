@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<ChimaLibSample.Models.Article>
-
+@using ChimaLib.Models
+@using ChimaLibSample.Models
 @{
     ViewBag.Title = "Index";
+    SortDefinition<Article> SortDef = ViewBag.SortDef;   //型付け
 }
 
 <h2>Index</h2>
@@ -12,22 +14,35 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Url)
+            @Html.ActionLink(
+                Html.DisplayNameFor(model => model.Url).ToString(),
+                "Index", new { sort = SortDef.GetNextSortKey(model=>model.Url) })
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink(
+                Html.DisplayNameFor(model => model.Title).ToString(),
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Title) })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.ActionLink(
+                Html.DisplayNameFor(model => model.Description).ToString(),
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Description) })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Viewcount)
+            @Html.ActionLink(
+                Html.DisplayNameFor(model => model.Viewcount).ToString(),
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Viewcount) })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Published)
+            @Html.ActionLink(
+                Html.DisplayNameFor(model => model.Published).ToString(),
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Published) })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Released)
+            @Html.ActionLink(
+                Html.DisplayNameFor(model => model.Released).ToString(),
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Released) })
         </th>
         <th></th>
     </tr>
