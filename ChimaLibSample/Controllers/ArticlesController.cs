@@ -17,9 +17,13 @@ namespace ChimaLibSample.Controllers
         private ChimaLibSampleContext db = new ChimaLibSampleContext();
 
         // GET: Articles
-        public ActionResult Index(string sort)
+        public ActionResult Index(string sort,string filter)
         {
             var query = db.Articles.AsQueryable();  //データソース
+            // filter
+            if(!string.IsNullOrEmpty(filter)) {
+                query = query.Where(a => a.Title.Contains(filter) || a.Description.Contains(filter));
+            }
 
             Article article = null;
             SortDefinition<Article> sort_def = new SortDefinition<Article>() {
