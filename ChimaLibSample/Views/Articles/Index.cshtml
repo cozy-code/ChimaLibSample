@@ -11,12 +11,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm(new { sort = SortDef.SortKey })) {
+    @Html.TextBox("filter","test")
+    <input type="submit" value="search" />
+    
+}
 <table class="table">
     <tr>
         <th>
             @Html.ActionLink(
-                Html.DisplayNameFor(model => model.Url).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model=>model.Url) })
+         Html.DisplayNameFor(model => model.Url).ToString(),
+         "Index", new { sort = SortDef.GetNextSortKey(model => model.Url) })
 
         </th>
         <th>
