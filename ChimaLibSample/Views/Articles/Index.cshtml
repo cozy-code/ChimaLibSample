@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
     SortDefinition<Article> SortDef = ViewBag.SortDef;   //型付け
+    string InputedFilter = ViewBag.InputedFilter; //ユーザー入力フィルタ
 }
 
 <h2>Index</h2>
@@ -11,38 +12,43 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm(new { sort = SortDef.SortKey })) {
+    @Html.TextBox("filter","test")
+    <input type="submit" value="search" />
+    
+}
 <table class="table">
     <tr>
         <th>
             @Html.ActionLink(
-                Html.DisplayNameFor(model => model.Url).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model=>model.Url) })
+         Html.DisplayNameFor(model => model.Url).ToString(),
+         "Index", new { sort = SortDef.GetNextSortKey(model => model.Url) , filter = InputedFilter})
 
         </th>
         <th>
             @Html.ActionLink(
                 Html.DisplayNameFor(model => model.Title).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model => model.Title) })
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Title), filter = InputedFilter })
         </th>
         <th>
             @Html.ActionLink(
                 Html.DisplayNameFor(model => model.Description).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model => model.Description) })
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Description), filter = InputedFilter })
         </th>
         <th>
             @Html.ActionLink(
                 Html.DisplayNameFor(model => model.Viewcount).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model => model.Viewcount) })
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Viewcount), filter = InputedFilter })
         </th>
         <th>
             @Html.ActionLink(
                 Html.DisplayNameFor(model => model.Published).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model => model.Published) })
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Published), filter = InputedFilter })
         </th>
         <th>
             @Html.ActionLink(
                 Html.DisplayNameFor(model => model.Released).ToString(),
-                "Index", new { sort = SortDef.GetNextSortKey(model => model.Released) })
+                "Index", new { sort = SortDef.GetNextSortKey(model => model.Released), filter = InputedFilter })
         </th>
         <th></th>
     </tr>
