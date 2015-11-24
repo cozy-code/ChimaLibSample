@@ -41,6 +41,7 @@ namespace ChimaLibSample.Controllers
             query=sort_def.AddOrderBy(query);
 
             ViewBag.SortDef = sort_def;     //リンク作成用にソート定義を渡す
+            ViewBag.InputedFilter = filter; //入力されたフィルター
             return View(query.ToList());    //ソート済み結果をViewに返す。
         }
 
